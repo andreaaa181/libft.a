@@ -6,13 +6,15 @@
 /*   By: asiguran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:45:05 by asiguran          #+#    #+#             */
-/*   Updated: 2023/01/17 17:45:07 by asiguran         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:39:51 by asiguran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <ctype.h>
 
 int	ft_isdigit(int c)
 {
-	return ('0' <= c && c <= '9');
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
 }
