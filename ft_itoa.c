@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asiguran <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/02 14:55:40 by asiguran          #+#    #+#             */
+/*   Updated: 2023/02/02 15:01:20 by asiguran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <stdio.h>
 
-int		len(long nb)
+int	len(long nb)
 {
-	int		len;
+	int	len;
 
 	len = 0;
 	if (nb < 0)
@@ -21,13 +33,13 @@ int		len(long nb)
 
 char	*ft_itoa(int nb)
 {
-	char *str;
+	char		*str;
 	long	n;
 	int		i;
 
 	n = nb;
 	i = len(n);
-	if (!(str = (char*)malloc(sizeof(char) * (i + 1))))
+	if	(!(str = (char*)malloc(sizeof(char) * (i + 1))))
 		return (NULL);
 	str[i--] = '\0';
 	if (n == 0)
