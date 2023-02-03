@@ -6,61 +6,42 @@
 /*   By: asiguran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:55:40 by asiguran          #+#    #+#             */
-/*   Updated: 2023/02/02 15:01:20 by asiguran         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:54:02 by asiguran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "libft.h"
 
-int	len(long nb)
+static void	ft_putnbr_stock(long n, char *str, int *i)
 {
-	int	len;
-
-	len = 0;
-	if (nb < 0)
+	if (n > 9)
 	{
-		nb = nb * -1;
-		len++;
+		ft_putnbr_stock(n / 10, str, i);
+		ft_putnbr_stock(n % 10, str, i);
 	}
-	while (nb > 0)
-	{
-		nb = nb / 10;
-		len++;
-	}
-	return (len);
+	else
+		str[(*i)++] = n + '0';
 }
 
-char	*ft_itoa(int nb)
+char	*ft_itoa(int n)
 {
-	char		*str;
-	long	n;
+	char	*str;
 	int		i;
+	long	nbr;
 
-	n = nb;
-	i = len(n);
-	if	(!(str = (char*)malloc(sizeof(char) * (i + 1))))
+	nbr = n;
+	if ((str = malloc(sizeof(char) * (ft_nbrlen(nbr) + 1))) == NULL)
 		return (NULL);
-	str[i--] = '\0';
-	if (n == 0)
+	i = 0;
+	if (nbr < 0)
 	{
-		str[0] = 48;
-		return (str);
+		str[i++] = '-';
+		nbr *= -1;
 	}
-	if (n < 0)
-	{
-		str[0] = '-';
-		n = n * -1;
-	}
-	while (n > 0)
-	{
-		str[i] = 48 + (n % 10);
-		n = n / 10;
-		i--;
-	}
+	ft_putnbr_stock(nbr, str, &i);
+	str[i] = '\0';
 	return (str);
 }
-
 //int main(void)
 //{
 //	printf("%s\n", ft_itoa(123156));
