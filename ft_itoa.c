@@ -5,68 +5,74 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asiguran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 14:55:40 by asiguran          #+#    #+#             */
-/*   Updated: 2023/02/09 14:46:31 by asiguran         ###   ########.fr       */
+/*   Created: 2023/02/13 15:27:28 by asiguran          #+#    #+#             */
+/*   Updated: 2023/02/18 11:43:45 by asiguran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include <stdlib.h>
+#include <stdio.h> //for main test
 
-/*
-** This auxiliary function counts the digits of the long integer received by
-** parameter.
-*/
-
-static int    ft_digit_count(long int i)
+static int	ft_strlen(const char *s)
 {
-    int    count;
+	int	i;
 
-    count = 0;
-    if (i < 0)
-    {
-        i *= -1;
-        count++;
-    }
-    while (i > 0)
-    {
-        i /= 10;
-        count++;
-    }
-    return (count);
+	i = 0;
+	while (s[i])
+		i++;
+	return i;	
 }
 
-char        *ft_itoa(int n)
+static char	*ft_strrev(char *str)
 {
-    char        *str;
-    int            i;
-    long int    nb;
+	int	i;
+	int	j;
+	int	tmp;
 
-    nb = n;
-    i = ft_digit_count(nb);
-    if (!(str = malloc(i * sizeof(char) + 1)))
-        return (0);
-    str[i--] = 0;
-    if (nb == 0)
-    {
-        str = ft_calloc(2, sizeof(char));
-        str[0] = 48;
-    }
-    if (nb < 0)
-    {
-        str[0] = '-';
-        nb = nb * -1;
-    }
-    while (nb > 0)
-    {
-        str[i--] = nb % 10 + '0';
-        nb = nb / 10;
-    }
-    return (str);
+	i = 0;
+	j = ft_strlen(str);
+	while (j > i)
+{	j--;
+		tmp = str[i];
+		str[i] = str[j];
+		str[j] = tmp;
+		i++;
+	}
+	return str;
+	}
+
+char	*ft_itoa(int nbr)
+{
+	int i;
+	int neg;
+	char *tmp;
+	i = 0;
+	neg = 0;
+	tmp = malloc(sizeof(char) * 12);
+	if (tmp == NULL || nbr == 0)
+		return ((nbr == 0) ? "0" :	NULL);
+	if (nbr == -2147483648)
+		return ("-2147483648");
+	if (nbr < 0)
+	{
+		neg = 1;
+		nbr *= -1;
+	}
+	while (nbr)
+	{
+		tmp[i++] = (nbr % 10) + '0';
+		nbr /= 10;
+	}
+	if (neg)
+	tmp[i] = '-';
+	return ft_strrev(tmp);
 }
+int	main(void)
+{
+	int i = 0;
+	int tab[5] = {-2147483648, -42, 0, 42, 2147483647};
 
-//
-//int	main(void)
-//{
-//	printf("%s\n", ft_itoa(123156));
-//    return (0);
-//}
-//
+	while (i < 5)
+		printf("%s\n", ft_itoa(tab[i++]));
+
+	return 0;
+}
