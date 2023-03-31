@@ -3,76 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asiguran <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: asiguran <asiguran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 15:27:28 by asiguran          #+#    #+#             */
-/*   Updated: 2023/02/18 11:43:45 by asiguran         ###   ########.fr       */
+/*   Created: 2023/03/20 12:03:24 by asiguran          #+#    #+#             */
+/*   Updated: 2023/03/24 10:34:17 by asiguran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdlib.h>
-#include <stdio.h> //for main test
 
-static int	ft_strlen(const char *s)
+#include "libft.h"
+
+int	len(long nb)
 {
-	int	i;
+	int	len;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return i;	
+	len = 0;
+	if (nb == 0)
+		return (1);
+	if (nb < 0)
+	{
+		nb = nb * -1;
+		len++;
+	}
+	while (nb > 0)
+	{
+		nb = nb / 10;
+		len++;
+	}
+	return (len);
 }
 
-static char	*ft_strrev(char *str)
+char	*ft_itoa(int nb)
 {
-	int	i;
-	int	j;
-	int	tmp;
+	char	*str;
+	long	n;
+	int		i;
 
-	i = 0;
-	j = ft_strlen(str);
-	while (j > i)
-{	j--;
-		tmp = str[i];
-		str[i] = str[j];
-		str[j] = tmp;
-		i++;
-	}
-	return str;
-	}
-
-char	*ft_itoa(int nbr)
-{
-	int i;
-	int neg;
-	char *tmp;
-	i = 0;
-	neg = 0;
-	tmp = malloc(sizeof(char) * 12);
-	if (tmp == NULL || nbr == 0)
-		return ((nbr == 0) ? "0" :	NULL);
-	if (nbr == -2147483648)
-		return ("-2147483648");
-	if (nbr < 0)
+	n = nb;
+	i = len(n);
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!str)
+		return (NULL);
+	str[i--] = '\0';
+	if (n == 0)
+		str[0] = 48;
+	if (n < 0)
 	{
-		neg = 1;
-		nbr *= -1;
+		str[0] = '-';
+		n = n * -1;
 	}
-	while (nbr)
+	while (n > 0)
 	{
-		tmp[i++] = (nbr % 10) + '0';
-		nbr /= 10;
+		str[i] = 48 + (n % 10);
+		n = n / 10;
+		i--;
 	}
-	if (neg)
-	tmp[i] = '-';
-	return ft_strrev(tmp);
-}
-int	main(void)
-{
-	int i = 0;
-	int tab[5] = {-2147483648, -42, 0, 42, 2147483647};
-
-	while (i < 5)
-		printf("%s\n", ft_itoa(tab[i++]));
-
-	return 0;
+	return (str);
 }

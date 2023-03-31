@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putlend_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asiguran <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: asiguran <asiguran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:15:37 by asiguran          #+#    #+#             */
-/*   Updated: 2023/02/02 16:15:39 by asiguran         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:34:40 by asiguran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {
