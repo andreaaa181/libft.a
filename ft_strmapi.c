@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asiguran <asiguran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 17:44:55 by asiguran          #+#    #+#             */
-/*   Updated: 2023/04/03 13:06:14 by asiguran         ###   ########.fr       */
+/*   Created: 2023/04/04 13:08:49 by asiguran          #+#    #+#             */
+/*   Updated: 2023/04/04 13:10:48 by asiguran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
+#include <stdlib.h>
 
-int	ft_isascii(int c)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	return (0 <= c && c <= 127);
+	int		i;
+	char	*buffer;
+
+	i = 0;
+	while (s[i])
+		i++;
+	buffer = (char *)malloc(i + 1);
+	if (buffer == NULL)
+		return (0);
+	i = 0;
+	while (s[i])
+	{
+		buffer[i] = (*f)(i, s[i]);
+		i++;
+	}
+	buffer[i] = 0;
+	return (buffer);
 }

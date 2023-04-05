@@ -6,7 +6,7 @@
 /*   By: asiguran <asiguran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:44:46 by asiguran          #+#    #+#             */
-/*   Updated: 2023/03/24 10:36:01 by asiguran         ###   ########.fr       */
+/*   Updated: 2023/04/03 13:03:52 by asiguran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	ft_isalpha(int c)
 {
 	if (c >= 'A' && c <= 'Z')
-		if (c >= 'a' && c <= 'z')
-			return (1);
+		return (1);
+	if (c >= 'a' && c <= 'z')
+		return (1);
 	return (0);
 }

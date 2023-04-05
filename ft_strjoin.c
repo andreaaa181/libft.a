@@ -6,11 +6,20 @@
 /*   By: asiguran <asiguran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:01:32 by asiguran          #+#    #+#             */
-/*   Updated: 2023/03/24 10:35:42 by asiguran         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:55:09 by asiguran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+char	*ft_strcpy(char *dst, const char *src)
+{
+	size_t	len_src;
+
+	len_src = ft_strlen(src);
+	ft_strlcpy(dst, src, len_src + 1);
+	return (dst);
+}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -29,7 +38,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	if (s1 && s2)
 	{
-		ft_strcat(ft_strcpy(res, s1), s2);
+		ft_strlcat(ft_strcpy(res, s1), s2, size + 1);
 		return (res);
 	}
 	else if (s1 != NULL && s2 == NULL)
